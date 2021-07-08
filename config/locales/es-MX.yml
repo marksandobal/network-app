@@ -1,0 +1,17 @@
+es-MX:
+  layouts:
+    application:
+      home: 'Inicio'
+      new_product: 'Nuevo Producto'
+      products: 'Productos'
+  products:
+    show:
+      add_comment: 'Agregar comentario...'
+      comments: 'Comentarios'
+      comment: 'Comentar'
+      product: 'Producto'
+  devise:
+    sessions:
+      user:
+        signed_in: 'Bienvenido de vuelta'
+        signed_out: 'Se ha cerrado la sesión'

@@ -1,0 +1,44 @@
+<div class="container">
+  <h2><%= t('.product') %> <%= product.name %></h2>
+
+  <div><%= t('.comments') %></div>
+  <ul class="list-group list-group-flush js--comments">
+    <% product.comments.each_with_index do |comment, index| %>
+      <li class="list-group-item">
+        <div class="card p-3">
+          <%= comment.user.email %>
+          <div class="ml-2">
+            <%= comment.comment %> <button class="btn btn-link">Comentar...</button>
+            <div class="ml-4">
+              <% comment.sub_comments.each do |sub|%>
+                <div>
+                  (<%= sub.user.email %>) - <%= sub.sub_comment %>
+                </div>
+              <% end %>
+            </div>
+            <div class='js--form ml-4 sr-only'>
+              <%= form_tag comment_sub_comments_path(comment) do %>
+              <div class="form-group">
+                <%= text_field_tag 'comment[sub_comment]', '',class: 'form-control', placeholder: t('.add_comment') %>
+              </div>
+              <div class="form-group">
+                <%= submit_tag t('.comment'), class: 'btn btn-primary' %>
+              </div>
+            <% end %>
+            </div>
+          </div>
+        </div>
+      </li>
+    <% end %>
+    <li class="list-group-item">
+      <%= form_tag product_comments_path(product) do %>
+        <div class="form-group">
+          <%= text_field_tag 'comment[comment]', '',class: 'form-control', placeholder: t('.add_comment') %>
+        </div>
+        <div class="form-group">
+          <%= submit_tag t('.comment'), class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </li>
+  </ul>
+</div>

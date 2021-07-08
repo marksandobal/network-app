@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NetworkingApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <% if user_signed_in? %>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <a class="navbar-brand" href="#"><%= t('.home') %></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <%= link_to t('.products'), products_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to t('.new_product'), new_product_path, class: 'nav-link' %>
+            </li>
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <% if user_signed_in? %>
+                  <%= current_user.email %>
+                <% end %>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <% if user_signed_in? %>
+                <%= link_to t('.sign_out'), destroy_user_session_path, class: "dropdown-item",method: :delete %>
+                <% end %>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <% end %>
+
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+    <%= yield %>
+  </body>
+</html>
